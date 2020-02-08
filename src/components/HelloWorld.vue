@@ -167,12 +167,10 @@
     },
     methods: {
       onSubmit(evt) {
-        console.log("test")
         evt.preventDefault()
-        this.axios.post("http://localhost:8080/registers", this.form).then(res => {
+        this.axios.post("https://roadmountain-api.herokuapp.com/registers", this.form).then(res => {
           console.log(res)
         })
-        alert(JSON.stringify(this.form))
       },
       onReset(evt) {
         evt.preventDefault()
