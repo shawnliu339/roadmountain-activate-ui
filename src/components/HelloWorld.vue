@@ -135,7 +135,14 @@
         ></b-form-input>
       </b-form-group>
 
-      <b-button type="submit" variant="primary">Submit</b-button>
+      <b-form-group id="input-group-4">
+        <b-form-checkbox v-model="form.accepted" :value="read" :unchecked-value="!read">
+          Accept
+          <a href="/static/private_policy.pdf" target="_blank"> Private Policy </a>
+        </b-form-checkbox>
+      </b-form-group>
+
+      <b-button type="submit" variant="primary" v-bind:disabled="!form.accepted">Submit</b-button>
       <b-button type="reset" variant="danger">Reset</b-button>
     </b-form>
   </div>
@@ -159,16 +166,18 @@
           dateOfBirth: '',
           email: '',
           brand: '',
-          plan: ''
+          plan: '',
+          accepted: false
         },
         suffixes: ['MR', 'MRS', 'MISS'],
-        show: true
+        show: true,
+        read: true
       }
     },
     methods: {
       onSubmit(evt) {
         evt.preventDefault()
-        this.axios.post("https://roadmountain-api.herokuapp.com/registers", this.form).then(res => {
+        this.axios.post("http://localhost:8080/registers", this.form).then(res => {
           console.log(res)
         })
       },
@@ -189,6 +198,7 @@
         this.form.email = ''
         this.form.brand = ''
         this.form.plan = ''
+        this.form.accepted = false
         // Trick to reset/clear native browser form validation state
         this.show = false
         this.$nextTick(() => {
