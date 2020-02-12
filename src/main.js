@@ -6,10 +6,12 @@ import router from './router'
 // Ajax通信ライブラリ
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import Vuelidate from 'vuelidate'
 
 Vue.config.productionTip = false
 
 Vue.use(VueAxios, axios)
+Vue.use(Vuelidate)
 
 /* eslint-disable no-new */
 new Vue({
