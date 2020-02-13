@@ -11,6 +11,8 @@ import Vuelidate from 'vuelidate'
 Vue.config.productionTip = false
 
 Vue.use(VueAxios, axios)
+Vue.axios.defaults.baseURL = `http://localhost:8080`;
+
 Vue.use(Vuelidate)
 
 /* eslint-disable no-new */

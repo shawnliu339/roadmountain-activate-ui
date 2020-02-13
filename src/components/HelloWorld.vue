@@ -139,13 +139,20 @@
         label-cols-sm="4"
         label-cols-lg="3"
       >
-        <b-form-input
+        <b-form-select
           id="input-9"
           v-model="$v.form.passportCountry.$model"
-          placeholder="Enter passport country"
           :state="validateState('passportCountry')"
           aria-describedby="input-9-feedback"
-        ></b-form-input>
+        >
+          <b-form-select-option
+            v-for="(country, key) in countries"
+            :key="key"
+            :value="key"
+          >
+            {{ country }}
+          </b-form-select-option>
+        </b-form-select>
         <b-form-invalid-feedback　id="input-9-feedback">
           Passport country is a required field.
         </b-form-invalid-feedback>
@@ -295,7 +302,7 @@
           simNo: '',
           passportNo: '',
           passportExpiry: '',
-          passportCountry: '',
+          passportCountry: 'JP',
           address: '',
           dateOfBirth: '',
           email: '',
@@ -304,9 +311,13 @@
           accepted: false
         },
         suffixes: ['MR', 'MRS', 'MISS'],
+        countries: null,
         show: true,
         read: true
       }
+    },
+    created() {
+      this.getCountries()
     },
     validations: {
       form: {
@@ -326,6 +337,12 @@
       }
     },
     methods: {
+      getCountries() {
+        this.axios.get("/countries").then(res =>{
+          this.countries = res.data
+          console.log(this.countries[0])
+        })
+      },
       validateState(name) {
         const { $dirty, $error } = this.$v.form[name];
         return $dirty ? !$error : null;
@@ -339,7 +356,7 @@
       },
       onSubmit(evt) {
         evt.preventDefault()
-        this.axios.post("http://localhost:8080/registers", this.form).then(res => {
+        this.axios.post("/registers", this.form).then(res => {
           console.log(res)
         })
       },
