@@ -2,36 +2,41 @@
   <div class="container">
     <h1>Register SIM Card</h1>
     <b-form ref="form" id="form" @reset="onReset" v-if="show">
-      <b-form-group
-        id="input-group-2"
-        label="Suffix:"
-        label-for="input-2"
-        label-cols-sm="4"
-        label-cols-lg="3"
-      >
-        <b-form-select
-          id="input-2"
-          v-model="$v.form.suffix.$model"
-          :options="suffixes"
-          :state="validateState('suffix')"
-        ></b-form-select>
-      </b-form-group>
+      <b-form-row class="form-group">
+        <b-col sm="4" lg="3" class="text-sm-right">
+          <b-icon-question-fill 
+            variant="success"
+            v-b-tooltip.hover
+            title="Tooltip directive content"
+          ></b-icon-question-fill>
+          <label for="input-suffix" class="col-form-label">Suffix:</label>
+        </b-col>
+        <b-col>
+          <b-form-select
+            id="input-suffix"
+            v-model="$v.form.suffix.$model"
+            :options="suffixes"
+            :state="validateState('suffix')"
+          ></b-form-select>
+        </b-col>
+      </b-form-row>
 
       <b-form-group
         id="input-group-3"
         label="First Name:"
-        label-for="input-3"
+        label-for="input-firstname"
         label-cols-sm="4"
         label-cols-lg="3"
+        label-align-sm="right"
       >
         <b-form-input
-          id="input-3"
+          id="input-firstname"
           v-model="$v.form.firstName.$model"
           placeholder="Enter first name"
           :state="validateState('firstName')"
-          aria-describedby="input-3-feedback"
+          aria-describedby="input-firstname-feedback"
         ></b-form-input>
-        <b-form-invalid-feedback　id="input-3-feedback">
+        <b-form-invalid-feedback　id="input-firstname-feedback">
           First name is a required field and only accpets alphabet.
         </b-form-invalid-feedback>
       </b-form-group>
@@ -39,18 +44,19 @@
       <b-form-group
         id="input-group-4"
         label="Middle Name (Optional):"
-        label-for="input-4"
+        label-for="input-middlename"
         label-cols-sm="4"
         label-cols-lg="3"
+        label-align-sm="right"
       >
         <b-form-input
-          id="input-4"
+          id="input-middlename"
           v-model="$v.form.middleName.$model"
           placeholder="Enter middle name"
           :state="validateState('middleName')"
-          aria-describedby="input-4-feedback"
+          aria-describedby="input-middlename-feedback"
         ></b-form-input>
-        <b-form-invalid-feedback　id="input-4-feedback">
+        <b-form-invalid-feedback　id="input-middlename-feedback">
           Middle name only accepts alphabet.
         </b-form-invalid-feedback>
       </b-form-group>
@@ -58,56 +64,62 @@
       <b-form-group
         id="input-group-5"
         label="Last Name:"
-        label-for="input-5"
+        label-for="input-lastname"
         label-cols-sm="4"
         label-cols-lg="3"
+        label-align-sm="right"
       >
         <b-form-input
-          id="input-5"
+          id="input-lastname"
           v-model="$v.form.lastName.$model"
           placeholder="Enter last name"
           :state="validateState('lastName')"
-          aria-describedby="input-5-feedback"
+          aria-describedby="input-lastname-feedback"
         ></b-form-input>
-        <b-form-invalid-feedback　id="input-4-feedback">
+        <b-form-invalid-feedback　id="input-lastname-feedback">
           Last name is a required field and only accpets alphabet.
         </b-form-invalid-feedback>
       </b-form-group>
 
-      <b-form-group
-        id="input-group-6"
-        label="Sim No:"
-        label-for="input-6"
-        label-cols-sm="4"
-        label-cols-lg="3"
-      >
-        <b-form-input
-          id="input-6"
+      <b-form-row class="form-group">
+        <b-col sm="4" lg="3" class="text-sm-right">
+          <b-icon-question-fill 
+            variant="success"
+            v-b-tooltip.hover
+            title="Tooltip directive content"
+          ></b-icon-question-fill>
+          <label for="input-sim-num" class="col-form-label">Sim No:</label>
+        </b-col>
+        <b-col>
+          <b-form-input
+          id="input-sim-num"
           v-model="$v.form.simNo.$model"
           placeholder="Enter sim number."
           :state="validateState('simNo')"
-          aria-describedby="input-6-feedback"
+          aria-describedby="input-sim-num-feedback"
         ></b-form-input>
-        <b-form-invalid-feedback　id="input-4-feedback">
+        <b-form-invalid-feedback　id="input-sim-num-feedback">
           SIM number is a required field and only accpets numerics.
         </b-form-invalid-feedback>
-      </b-form-group>
+        </b-col>
+      </b-form-row>
 
       <b-form-group
         id="input-group-7"
         label="Passport No:"
-        label-for="input-7"
+        label-for="input-passport-num"
         label-cols-sm="4"
         label-cols-lg="3"
+        label-align-sm="right"
       >
         <b-form-input
-          id="input-7"
+          id="input-passport-num"
           v-model="$v.form.passportNo.$model"
           placeholder="Enter passport number."
           :state="validateState('passportNo')"
-          aria-describedby="input-7-feedback"
+          aria-describedby="input-passport-num-feedback"
         ></b-form-input>
-        <b-form-invalid-feedback　id="input-7-feedback">
+        <b-form-invalid-feedback　id="input-passport-num-feedback">
           Passport number is a required field and only accepts alphanumerics.
         </b-form-invalid-feedback>
       </b-form-group>
@@ -115,19 +127,20 @@
       <b-form-group
         id="input-group-8"
         label="Passport Expiry:"
-        label-for="input-8"
+        label-for="input-expiry"
         label-cols-sm="4"
         label-cols-lg="3"
+        label-align-sm="right"
       >
         <b-form-input
-          id="input-8"
+          id="input-expiry"
           v-model="$v.form.passportExpiry.$model"
           type="date"
           placeholder="Enter passport expiry"
           :state="validateState('passportExpiry')"
-          aria-describedby="input-8-feedback"
+          aria-describedby="input-expiry-feedback"
         ></b-form-input>
-        <b-form-invalid-feedback　id="input-8-feedback">
+        <b-form-invalid-feedback　id="input-expiry-feedback">
           Passport expiry is a required field.
         </b-form-invalid-feedback>
       </b-form-group>
@@ -135,15 +148,16 @@
       <b-form-group
         id="input-group-9"
         label="Passport Country:"
-        label-for="input-9"
+        label-for="input-country"
         label-cols-sm="4"
         label-cols-lg="3"
+        label-align-sm="right"
       >
         <b-form-select
-          id="input-9"
+          id="input-country"
           v-model="$v.form.passportCountry.$model"
           :state="validateState('passportCountry')"
-          aria-describedby="input-9-feedback"
+          aria-describedby="input-country-feedback"
         >
           <b-form-select-option
             v-for="(country, key) in countries"
@@ -153,7 +167,7 @@
             {{ country }}
           </b-form-select-option>
         </b-form-select>
-        <b-form-invalid-feedback　id="input-9-feedback">
+        <b-form-invalid-feedback　id="input-country-feedback">
           Passport country is a required field.
         </b-form-invalid-feedback>
       </b-form-group>
@@ -161,18 +175,19 @@
       <b-form-group
         id="input-group-10"
         label="Address in Australia:"
-        label-for="input-10"
+        label-for="input-address"
         label-cols-sm="4"
         label-cols-lg="3"
+        label-align-sm="right"
       >
         <b-form-input
-          id="input-10"
+          id="input-address"
           v-model="$v.form.address.$model"
           placeholder="Enter address in Australia"
           :state="validateState('address')"
-          aria-describedby="input-10-feedback"
+          aria-describedby="input-address-feedback"
         ></b-form-input>
-        <b-form-invalid-feedback　id="input-10-feedback">
+        <b-form-invalid-feedback　id="input-address-feedback">
           Address is a required field.
         </b-form-invalid-feedback>
       </b-form-group>
@@ -180,19 +195,20 @@
       <b-form-group
         id="input-group-11"
         label="Date of Birth:"
-        label-for="input-11"
+        label-for="input-birthday"
         label-cols-sm="4"
         label-cols-lg="3"
+        label-align-sm="right"
       >
         <b-form-input
-          id="input-11"
+          id="input-birthday"
           v-model="$v.form.dateOfBirth.$model"
           type="date"
           placeholder="Enter date of birth"
           :state="validateState('dateOfBirth')"
-          aria-describedby="input-11-feedback"
+          aria-describedby="input-birthday-feedback"
         ></b-form-input>
-        <b-form-invalid-feedback　id="input-11-feedback">
+        <b-form-invalid-feedback　id="input-birthday-feedback">
           Date of birth is a required field.
         </b-form-invalid-feedback>
       </b-form-group>
@@ -200,18 +216,20 @@
       <b-form-group
         id="input-group-12"
         label="Email address:"
-        label-for="input-12"
-        label-cols-sm="4" label-cols-lg="3"
+        label-for="input-email"
+        label-cols-sm="4"
+        label-cols-lg="3"
+        label-align-sm="right"
       >
         <b-form-input
-          id="input-12"
+          id="input-email"
           v-model="$v.form.email.$model"
           type="email"
           :state="validateState('email')"
           placeholder="Enter email"
-          aria-describedby="input-12-feedback"
+          aria-describedby="input-email-feedback"
         ></b-form-input>
-        <b-form-invalid-feedback　id="input-12-feedback">
+        <b-form-invalid-feedback　id="input-email-feedback">
           Email is a required field.
         </b-form-invalid-feedback>
       </b-form-group>
@@ -219,19 +237,20 @@
       <b-form-group
         id="input-group-13"
         label="Brand:"
-        label-for="input-13"
+        label-for="input-brand"
         label-cols-sm="4"
         label-cols-lg="3"
+        label-align-sm="right"
       >
         <b-form-input
-          id="input-13"
+          id="input-brand"
           v-model="$v.form.brand.$model"
           placeholder="Enter brand"
           :state="validateState('brand')"
-          aria-describedby="input-13-feedback"
+          aria-describedby="input-brand-feedback"
           disabled
         ></b-form-input>
-        <b-form-invalid-feedback　id="input-13-feedback">
+        <b-form-invalid-feedback　id="input-brand-feedback">
           Brand is a required field.
         </b-form-invalid-feedback>
       </b-form-group>
@@ -239,19 +258,20 @@
       <b-form-group
         id="input-group-14"
         label="Plan($):"
-        label-for="input-14"
+        label-for="input-plan"
         label-cols-sm="4"
         label-cols-lg="3"
+        label-align-sm="right"
       >
         <b-form-input
-          id="input-14"
+          id="input-plan"
           v-model="$v.form.plan.$model"
           placeholder="Enter plan"
           :state="validateState('plan')"
-          aria-describedby="input-13-feedback"
+          aria-describedby="input-plan-feedback"
           disabled
         ></b-form-input>
-        <b-form-invalid-feedback　id="input-14-feedback">
+        <b-form-invalid-feedback　id="input-plan-feedback">
           Plan is a required field.
         </b-form-invalid-feedback>
       </b-form-group>
