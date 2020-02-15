@@ -4,12 +4,10 @@
     <b-form ref="form" id="form" @reset="onReset" v-if="show">
       <b-form-row class="form-group">
         <b-col sm="4" lg="3" class="text-sm-right">
-          <b-icon-question-fill 
-            font-scale="1.3"
-            variant="success"
-            v-b-tooltip.hover
-            title="Tooltip directive content"
-          ></b-icon-question-fill>
+          <b-button id="tooltip-suffix" pill variant="success"
+            style="width: 17px; height: 17px; vertical-align: text-top; padding: 0px; font-size: 0.8em; font-weight: bold;"
+          >?</b-button>
+          <b-tooltip target="tooltip-suffix" title="Tooltip directive content"></b-tooltip>
           <label for="input-suffix" class="col-form-label">{{ $t("register.suffix") }}</label>
         </b-col>
         <b-col>
@@ -84,12 +82,10 @@
 
       <b-form-row class="form-group">
         <b-col sm="4" lg="3" class="text-sm-right">
-          <b-icon-question-fill 
-            variant="success"
-            font-scale="1.3"
-            v-b-tooltip.hover
-            title="Tooltip directive content"
-          ></b-icon-question-fill>
+          <b-button id="tooltip-sim" pill variant="success"
+            style="width: 17px; height: 17px; vertical-align: text-top; padding: 0px; font-size: 0.8em; font-weight: bold;"
+          >?</b-button>
+          <b-tooltip target="tooltip-sim" title="Tooltip directive content"></b-tooltip>
           <label for="input-sim-num" class="col-form-label">{{ $t('register.simNo') }}</label>
         </b-col>
         <b-col>
