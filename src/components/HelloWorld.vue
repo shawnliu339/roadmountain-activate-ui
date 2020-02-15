@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1>Register SIM Card</h1>
+    <h1>{{ $t("register.title") }}</h1>
     <b-form ref="form" id="form" @reset="onReset" v-if="show">
       <b-form-row class="form-group">
         <b-col sm="4" lg="3" class="text-sm-right">
@@ -10,7 +10,7 @@
             v-b-tooltip.hover
             title="Tooltip directive content"
           ></b-icon-question-fill>
-          <label for="input-suffix" class="col-form-label">Suffix:</label>
+          <label for="input-suffix" class="col-form-label">{{ $t("register.suffix") }}</label>
         </b-col>
         <b-col>
           <b-form-select
@@ -24,7 +24,7 @@
 
       <b-form-group
         id="input-group-3"
-        label="First Name:"
+        :label="$t('register.firstName')"
         label-for="input-firstname"
         label-cols-sm="4"
         label-cols-lg="3"
@@ -33,18 +33,18 @@
         <b-form-input
           id="input-firstname"
           v-model="$v.form.firstName.$model"
-          placeholder="Enter first name"
+          :placeholder="$t('register.firstNamePlaceHolder')"
           :state="validateState('firstName')"
           aria-describedby="input-firstname-feedback"
         ></b-form-input>
         <b-form-invalid-feedback　id="input-firstname-feedback">
-          First name is a required field and only accpets alphabet.
+          {{ $t("register.firstNameInvalidFeedback") }}
         </b-form-invalid-feedback>
       </b-form-group>
 
       <b-form-group
         id="input-group-4"
-        label="Middle Name (Optional):"
+        :label="$t('register.middleName')"
         label-for="input-middlename"
         label-cols-sm="4"
         label-cols-lg="3"
@@ -53,18 +53,18 @@
         <b-form-input
           id="input-middlename"
           v-model="$v.form.middleName.$model"
-          placeholder="Enter middle name"
+          :placeholder="$t('register.middleNamePlaceHolder')"
           :state="validateState('middleName')"
           aria-describedby="input-middlename-feedback"
         ></b-form-input>
         <b-form-invalid-feedback　id="input-middlename-feedback">
-          Middle name only accepts alphabet.
+          {{ $t("register.middleNameInvalidFeedback") }}
         </b-form-invalid-feedback>
       </b-form-group>
 
       <b-form-group
         id="input-group-5"
-        label="Last Name:"
+        :label="$t('register.lastName')"
         label-for="input-lastname"
         label-cols-sm="4"
         label-cols-lg="3"
@@ -73,12 +73,12 @@
         <b-form-input
           id="input-lastname"
           v-model="$v.form.lastName.$model"
-          placeholder="Enter last name"
+          :placeholder="$t('register.lastNamePlaceHolder')"
           :state="validateState('lastName')"
           aria-describedby="input-lastname-feedback"
         ></b-form-input>
         <b-form-invalid-feedback　id="input-lastname-feedback">
-          Last name is a required field and only accpets alphabet.
+          {{ $t("register.lastNameInvalidFeedback") }}
         </b-form-invalid-feedback>
       </b-form-group>
 
@@ -90,25 +90,25 @@
             v-b-tooltip.hover
             title="Tooltip directive content"
           ></b-icon-question-fill>
-          <label for="input-sim-num" class="col-form-label">Sim No:</label>
+          <label for="input-sim-num" class="col-form-label">{{ $t('register.simNo') }}</label>
         </b-col>
         <b-col>
           <b-form-input
           id="input-sim-num"
           v-model="$v.form.simNo.$model"
-          placeholder="Enter sim number."
+          :placeholder="$t('register.simNoPlaceHolder')"
           :state="validateState('simNo')"
           aria-describedby="input-sim-num-feedback"
         ></b-form-input>
         <b-form-invalid-feedback　id="input-sim-num-feedback">
-          SIM number is a required field and only accpets numerics.
+          {{ $t("register.simNoInvalidFeedback") }}
         </b-form-invalid-feedback>
         </b-col>
       </b-form-row>
 
       <b-form-group
         id="input-group-7"
-        label="Passport No:"
+        :label="$t('register.passportNo')"
         label-for="input-passport-num"
         label-cols-sm="4"
         label-cols-lg="3"
@@ -117,18 +117,18 @@
         <b-form-input
           id="input-passport-num"
           v-model="$v.form.passportNo.$model"
-          placeholder="Enter passport number."
+          :placeholder="$t('register.passportNoPlaceHolder')"
           :state="validateState('passportNo')"
           aria-describedby="input-passport-num-feedback"
         ></b-form-input>
         <b-form-invalid-feedback　id="input-passport-num-feedback">
-          Passport number is a required field and only accepts alphanumerics.
+          {{ $t("register.passportNoInvalidFeedback") }}
         </b-form-invalid-feedback>
       </b-form-group>
 
       <b-form-group
         id="input-group-8"
-        label="Passport Expiry:"
+        :label="$t('register.passportExpiry')"
         label-for="input-expiry"
         label-cols-sm="4"
         label-cols-lg="3"
@@ -138,18 +138,17 @@
           id="input-expiry"
           v-model="$v.form.passportExpiry.$model"
           type="date"
-          placeholder="Enter passport expiry"
           :state="validateState('passportExpiry')"
           aria-describedby="input-expiry-feedback"
         ></b-form-input>
         <b-form-invalid-feedback　id="input-expiry-feedback">
-          Passport expiry is a required field.
+          {{ $t("register.passportExpiryInvalidFeedback") }}
         </b-form-invalid-feedback>
       </b-form-group>
 
       <b-form-group
         id="input-group-9"
-        label="Passport Country:"
+        :label="$t('register.passportCountry')"
         label-for="input-country"
         label-cols-sm="4"
         label-cols-lg="3"
@@ -170,13 +169,13 @@
           </b-form-select-option>
         </b-form-select>
         <b-form-invalid-feedback　id="input-country-feedback">
-          Passport country is a required field.
+          {{ $t("register.passportCountryInvalidFeedback") }}
         </b-form-invalid-feedback>
       </b-form-group>
 
       <b-form-group
         id="input-group-10"
-        label="Address in Australia:"
+        :label="$t('register.address')"
         label-for="input-address"
         label-cols-sm="4"
         label-cols-lg="3"
@@ -185,18 +184,18 @@
         <b-form-input
           id="input-address"
           v-model="$v.form.address.$model"
-          placeholder="Enter address in Australia"
+          :placeholder="$t('register.addressPlaceHolder')"
           :state="validateState('address')"
           aria-describedby="input-address-feedback"
         ></b-form-input>
         <b-form-invalid-feedback　id="input-address-feedback">
-          Address is a required field.
+          {{ $t("register.addressInvalidFeedback") }}
         </b-form-invalid-feedback>
       </b-form-group>
 
       <b-form-group
         id="input-group-11"
-        label="Date of Birth:"
+        :label="$t('register.birthday')"
         label-for="input-birthday"
         label-cols-sm="4"
         label-cols-lg="3"
@@ -206,18 +205,17 @@
           id="input-birthday"
           v-model="$v.form.dateOfBirth.$model"
           type="date"
-          placeholder="Enter date of birth"
           :state="validateState('dateOfBirth')"
           aria-describedby="input-birthday-feedback"
         ></b-form-input>
         <b-form-invalid-feedback　id="input-birthday-feedback">
-          Date of birth is a required field.
+          {{ $t("register.birthdayInvalidFeedback") }}
         </b-form-invalid-feedback>
       </b-form-group>
 
       <b-form-group
         id="input-group-12"
-        label="Email address:"
+        :label="$t('register.email')"
         label-for="input-email"
         label-cols-sm="4"
         label-cols-lg="3"
@@ -228,17 +226,17 @@
           v-model="$v.form.email.$model"
           type="email"
           :state="validateState('email')"
-          placeholder="Enter email"
+          :placeholder="$t('register.emailPlaceHolder')"
           aria-describedby="input-email-feedback"
         ></b-form-input>
         <b-form-invalid-feedback　id="input-email-feedback">
-          Email is a required field.
+          {{ $t("register.emailInvalidFeedback") }}
         </b-form-invalid-feedback>
       </b-form-group>
 
       <b-form-group
         id="input-group-13"
-        label="Brand:"
+        :label="$t('register.brand')"
         label-for="input-brand"
         label-cols-sm="4"
         label-cols-lg="3"
@@ -247,19 +245,17 @@
         <b-form-input
           id="input-brand"
           v-model="$v.form.brand.$model"
-          placeholder="Enter brand"
           :state="validateState('brand')"
           aria-describedby="input-brand-feedback"
           disabled
         ></b-form-input>
         <b-form-invalid-feedback　id="input-brand-feedback">
-          Brand is a required field.
         </b-form-invalid-feedback>
       </b-form-group>
 
       <b-form-group
         id="input-group-14"
-        label="Plan($):"
+        :label="$t('register.plan')"
         label-for="input-plan"
         label-cols-sm="4"
         label-cols-lg="3"
@@ -268,41 +264,43 @@
         <b-form-input
           id="input-plan"
           v-model="$v.form.plan.$model"
-          placeholder="Enter plan"
           :state="validateState('plan')"
           aria-describedby="input-plan-feedback"
           disabled
         ></b-form-input>
         <b-form-invalid-feedback　id="input-plan-feedback">
-          Plan is a required field.
         </b-form-invalid-feedback>
       </b-form-group>
 
       <b-form-group id="input-group-4">
         <b-form-checkbox v-model="accepted" :value="read" :unchecked-value="!read">
-          Accept
-          <a href="/static/private_policy.pdf" target="_blank"> Private Policy </a>
+          {{ $t("register.accept") }}
+          <a href="/static/private_policy.pdf" target="_blank">
+            {{ $t("register.privatePolicy") }}
+          </a>
         </b-form-checkbox>
       </b-form-group>
 
-      <b-button @click="showModal" variant="primary" v-bind:disabled="!accepted">Submit</b-button>
-      <b-button type="reset" variant="danger">Reset</b-button>
+      <b-button @click="showModal" variant="primary" v-bind:disabled="!accepted">
+        {{ $t("register.submit") }}
+      </b-button>
+      <b-button type="reset" variant="danger">{{ $t("register.reset") }}</b-button>
     </b-form>
 
     <b-modal ref="modal-check" title="Please check your infomation" @ok="onSubmit">
-      <p class="my-4">Suffix: {{form.suffix}}</p>
-      <p class="my-4">First Name: {{form.firstName}}</p>
-      <p class="my-4">Middle Name: {{form.middleName}}</p>
-      <p class="my-4">Last Name: {{form.lastName}}</p>
-      <p class="my-4">Sim No: {{form.simNo}}</p>
-      <p class="my-4">Passport No: {{form.passportNo}}</p>
-      <p class="my-4">Passport Expiry: {{form.passportExpiry}}</p>
-      <p class="my-4">Passport Country: {{form.passportCountry}}</p>
-      <p class="my-4">Address in Australia: {{form.address}}</p>
-      <p class="my-4">Date of Birth: {{form.dateOfBirth}}</p>
-      <p class="my-4">Email Address: {{form.email}}</p>
-      <p class="my-4">Brand: {{form.brand}}</p>
-      <p class="my-4">Plan($): {{form.plan}}</p>
+      <p class="my-4">{{ $t("register.suffix") }} {{form.suffix}}</p>
+      <p class="my-4">{{ $t("register.firstName") }} {{form.firstName}}</p>
+      <p class="my-4">{{ $t("register.middleName") }} {{form.middleName}}</p>
+      <p class="my-4">{{ $t("register.lastName") }} {{form.lastName}}</p>
+      <p class="my-4">{{ $t("register.simNo") }} {{form.simNo}}</p>
+      <p class="my-4">{{ $t("register.passportNo") }} {{form.passportNo}}</p>
+      <p class="my-4">{{ $t("register.passportExpiry") }} {{form.passportExpiry}}</p>
+      <p class="my-4">{{ $t("register.passportCountry") }} {{form.passportCountry}}</p>
+      <p class="my-4">{{ $t("register.address") }} {{form.address}}</p>
+      <p class="my-4">{{ $t("register.birthday") }} {{form.dateOfBirth}}</p>
+      <p class="my-4">{{ $t("register.email") }} {{form.email}}</p>
+      <p class="my-4">{{ $t("register.brand") }} {{form.brand}}</p>
+      <p class="my-4">{{ $t("register.plan") }} {{form.plan}}</p>
       <p class="my-4">If all of the infomation is correct, please click ok to submit.</p>
     </b-modal>
   </div>

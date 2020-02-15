@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import i18n from './i18n'
 // Ajax通信ライブラリ
 import axios from 'axios'
 import VueAxios from 'vue-axios'
@@ -27,6 +28,7 @@ Vue.use(Vuelidate)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  i18n: i18n,
   router,
   components: { App },
   template: '<App/>'
