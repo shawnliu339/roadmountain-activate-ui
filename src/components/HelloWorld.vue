@@ -5,6 +5,7 @@
       <b-form-row class="form-group">
         <b-col sm="4" lg="3" class="text-sm-right">
           <b-icon-question-fill 
+            font-scale="1.3"
             variant="success"
             v-b-tooltip.hover
             title="Tooltip directive content"
@@ -85,6 +86,7 @@
         <b-col sm="4" lg="3" class="text-sm-right">
           <b-icon-question-fill 
             variant="success"
+            font-scale="1.3"
             v-b-tooltip.hover
             title="Tooltip directive content"
           ></b-icon-question-fill>
@@ -316,16 +318,16 @@
       return {
         form: {
           suffix: 'MR',
-          firstName: '',
-          middleName: '',
-          lastName: '',
-          simNo: '',
-          passportNo: '',
-          passportExpiry: '',
+          firstName: 'test',
+          middleName: 'test',
+          lastName: 'test',
+          simNo: '1',
+          passportNo: 'test',
+          passportExpiry: '2010-10-10',
           passportCountry: 'JP',
-          address: '',
-          dateOfBirth: '',
-          email: '',
+          address: 'test',
+          dateOfBirth: '2010-10-10',
+          email: 'test@test.com',
           brand: 'Optus',
           plan: '40'
         },
@@ -379,9 +381,18 @@
         .then(res => {
           this.resetForm()
           this.$refs['modal-check'].hide()
+          this.makeToast('success', "Register successfully! We will send e-mail to you. " +
+            "If you don't receive the mail, please contact us.")
         })
         .catch(error => {
-          console.log(error)
+          this.makeToast('danger', "System error! Please contact us.")          
+        })
+      },
+      makeToast(variant, message) {
+        this.$bvToast.toast(message, {
+          title: 'Register Result',
+          autoHideDelay: 5000,
+          variant: variant
         })
       },
       resetForm() {
