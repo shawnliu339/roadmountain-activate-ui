@@ -10,9 +10,18 @@ import Vuelidate from 'vuelidate'
 
 Vue.config.productionTip = false
 
+// bootstrap vue
+import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue'
+import 'bootstrap/dist/css/bootstrap.css' // added
+import 'bootstrap-vue/dist/bootstrap-vue.css' // added
+Vue.use(BootstrapVue)
+Vue.use(BootstrapVueIcons)
+
+// axios
 Vue.use(VueAxios, axios)
 Vue.axios.defaults.baseURL = `http://localhost:8080`;
 
+// validation
 Vue.use(Vuelidate)
 
 /* eslint-disable no-new */
