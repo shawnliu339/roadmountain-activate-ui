@@ -277,17 +277,17 @@
       </b-form-group>
 
       <b-form-group id="input-group-4">
-        <b-form-checkbox v-model="form.accepted" :value="read" :unchecked-value="!read">
+        <b-form-checkbox v-model="accepted" :value="read" :unchecked-value="!read">
           Accept
           <a href="/static/private_policy.pdf" target="_blank"> Private Policy </a>
         </b-form-checkbox>
       </b-form-group>
 
-      <b-button @click="showModal" variant="primary" v-bind:disabled="!form.accepted">Submit</b-button>
+      <b-button @click="showModal" variant="primary" v-bind:disabled="!accepted">Submit</b-button>
       <b-button type="reset" variant="danger">Reset</b-button>
     </b-form>
 
-    <b-modal ref="modal-1" title="Please check your infomation" @ok="onSubmit">
+    <b-modal ref="modal-check" title="Please check your infomation" @ok="onSubmit">
       <p class="my-4">Suffix: {{form.suffix}}</p>
       <p class="my-4">First Name: {{form.firstName}}</p>
       <p class="my-4">Middle Name: {{form.middleName}}</p>
@@ -327,13 +327,13 @@
           dateOfBirth: '',
           email: '',
           brand: 'Optus',
-          plan: '40',
-          accepted: false
+          plan: '40'
         },
         suffixes: ['MR', 'MRS', 'MISS'],
         countries: null,
         show: true,
-        read: true
+        read: true,
+        accepted: false
       }
     },
     created() {
@@ -360,7 +360,6 @@
       getCountries() {
         this.axios.get("/countries").then(res =>{
           this.countries = res.data
-          console.log(this.countries[0])
         })
       },
       validateState(name) {
@@ -372,16 +371,22 @@
         if (this.$v.form.$anyError) {
           return;
         }
-        this.$refs['modal-1'].show()
+        this.$refs['modal-check'].show()
       },
       onSubmit(evt) {
         evt.preventDefault()
-        this.axios.post("/registers", this.form).then(res => {
-          console.log(res)
+        this.axios.post("/registers", this.form)
+        .then(res => {
+          this.resetForm()
+          this.$refs['modal-check'].hide()
+        })
+        .catch(error => {
+          console.log(error)
         })
       },
-      onReset(evt) {
-        evt.preventDefault()
+      resetForm() {
+        // Rest validation
+        this.$v.form.$reset()
         // Reset our form values
         this.form.suffix = 'MR'
         this.form.firstName = ''
@@ -390,18 +395,22 @@
         this.form.simNo = ''
         this.form.passportNo = ''
         this.form.passportExpiry = ''
-        this.form.passportCountry = ''
+        this.form.passportCountry = 'JP'
         this.form.address = ''
         this.form.dateOfBirth = ''
         this.form.email = ''
-        this.form.brand = ''
-        this.form.plan = ''
-        this.form.accepted = false
+        this.form.brand = 'Optus'
+        this.form.plan = '40'
+        this.accepted = false
         // Trick to reset/clear native browser form validation state
         this.show = false
         this.$nextTick(() => {
           this.show = true
         })
+      },
+      onReset(evt) {
+        evt.preventDefault()
+        this.resetForm()
       }
     }
   }
