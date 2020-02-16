@@ -7,7 +7,9 @@
           <b-button id="tooltip-suffix" pill variant="success"
             style="width: 17px; height: 17px; vertical-align: text-top; padding: 0px; font-size: 0.8em; font-weight: bold;"
           >?</b-button>
-          <b-tooltip target="tooltip-suffix" title="Tooltip directive content"></b-tooltip>
+          <b-tooltip target="tooltip-suffix" >
+            <span v-html="$t('register.suffixTooltip')"></span>
+          </b-tooltip>
           <label for="input-suffix" class="col-form-label">{{ $t("register.suffix") }}</label>
         </b-col>
         <b-col>
@@ -85,7 +87,7 @@
           <b-button id="tooltip-sim" pill variant="success"
             style="width: 17px; height: 17px; vertical-align: text-top; padding: 0px; font-size: 0.8em; font-weight: bold;"
           >?</b-button>
-          <b-tooltip target="tooltip-sim" title="Tooltip directive content"></b-tooltip>
+          <b-tooltip target="tooltip-sim" :title="$t('register.simNoTooltip')"></b-tooltip>
           <label for="input-sim-num" class="col-form-label">{{ $t('register.simNo') }}</label>
         </b-col>
         <b-col>
@@ -283,21 +285,21 @@
       <b-button type="reset" variant="danger">{{ $t("register.reset") }}</b-button>
     </b-form>
 
-    <b-modal ref="modal-check" title="Please check your infomation" @ok="onSubmit">
-      <p class="my-4">{{ $t("register.suffix") }} {{form.suffix}}</p>
-      <p class="my-4">{{ $t("register.firstName") }} {{form.firstName}}</p>
-      <p class="my-4">{{ $t("register.middleName") }} {{form.middleName}}</p>
-      <p class="my-4">{{ $t("register.lastName") }} {{form.lastName}}</p>
-      <p class="my-4">{{ $t("register.simNo") }} {{form.simNo}}</p>
-      <p class="my-4">{{ $t("register.passportNo") }} {{form.passportNo}}</p>
-      <p class="my-4">{{ $t("register.passportExpiry") }} {{form.passportExpiry}}</p>
-      <p class="my-4">{{ $t("register.passportCountry") }} {{form.passportCountry}}</p>
-      <p class="my-4">{{ $t("register.address") }} {{form.address}}</p>
-      <p class="my-4">{{ $t("register.birthday") }} {{form.dateOfBirth}}</p>
-      <p class="my-4">{{ $t("register.email") }} {{form.email}}</p>
-      <p class="my-4">{{ $t("register.brand") }} {{form.brand}}</p>
-      <p class="my-4">{{ $t("register.plan") }} {{form.plan}}</p>
-      <p class="my-4">If all of the infomation is correct, please click ok to submit.</p>
+    <b-modal ref="modal-check" :title="$t('register.modalTitle')" @ok="onSubmit">
+      <p>{{ $t("register.suffix") }} {{form.suffix}}</p>
+      <p>{{ $t("register.firstName") }} {{form.firstName}}</p>
+      <p>{{ $t("register.middleName") }} {{form.middleName}}</p>
+      <p>{{ $t("register.lastName") }} {{form.lastName}}</p>
+      <p>{{ $t("register.simNo") }} {{form.simNo}}</p>
+      <p>{{ $t("register.passportNo") }} {{form.passportNo}}</p>
+      <p>{{ $t("register.passportExpiry") }} {{form.passportExpiry}}</p>
+      <p>{{ $t("register.passportCountry") }} {{countries[form.passportCountry]}}</p>
+      <p>{{ $t("register.address") }} {{form.address}}</p>
+      <p>{{ $t("register.birthday") }} {{form.dateOfBirth}}</p>
+      <p>{{ $t("register.email") }} {{form.email}}</p>
+      <p>{{ $t("register.brand") }} {{form.brand}}</p>
+      <p>{{ $t("register.plan") }} {{form.plan}}</p>
+      <p v-html="$t('register.modalContent')"></p>
     </b-modal>
   </div>
 </template>
@@ -326,7 +328,7 @@
           plan: '40'
         },
         suffixes: ['MR', 'MRS', 'MISS'],
-        countries: null,
+        countries: { 'JP': 'Japan' },
         show: true,
         read: true,
         accepted: false
@@ -375,17 +377,15 @@
         .then(res => {
           this.resetForm()
           this.$refs['modal-check'].hide()
-          this.makeToast('success', "Register successfully! We will send e-mail to you. " +
-            "If you don't receive the mail, please contact us.")
+          this.makeToast('success', this.$t('register.successfulMessage'))
         })
         .catch(error => {
-          this.makeToast('danger', "System error! Please contact us.")          
+          this.makeToast('danger', this.$t('register.errorMessage'))
         })
       },
       makeToast(variant, message) {
         this.$bvToast.toast(message, {
-          title: 'Register Result',
-          autoHideDelay: 5000,
+          noAutoHide: true,
           variant: variant
         })
       },
