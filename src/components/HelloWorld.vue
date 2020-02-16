@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    <h1>{{ $t("register.title") }}</h1>
     <b-form ref="form" id="form" @reset="onReset" v-if="show">
       <b-form-row class="form-group">
         <b-col sm="4" lg="3" class="text-sm-right">
