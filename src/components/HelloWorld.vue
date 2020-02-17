@@ -304,7 +304,7 @@
 </template>
 
 <script>
-  import { required, alpha, email, numeric, alphaNum } from 'vuelidate/lib/validators'
+  import { required, alpha, email, numeric, alphaNum, minLength, maxLength } from 'vuelidate/lib/validators'
   import { validationMixin } from 'vuelidate'
 
   export default {
@@ -342,7 +342,12 @@
         firstName: { required, alpha },
         middleName: { alpha },
         lastName: { required, alpha },
-        simNo: { required, numeric },
+        simNo: {
+          required,
+          numeric,
+          minLength: minLength(13),
+          maxLength: maxLength(13)
+        },
         passportNo: { required, alphaNum },
         passportExpiry: { required },
         passportCountry: { required },
