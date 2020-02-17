@@ -284,7 +284,13 @@
       <b-button type="reset" variant="danger">{{ $t("register.reset") }}</b-button>
     </b-form>
 
-    <b-modal ref="modal-check" :title="$t('register.modalTitle')" @ok="onSubmit">
+    <b-modal
+      scrollable
+      size="sm"
+      ref="modal-check" 
+      :title="$t('register.modalTitle')" 
+      @ok="onSubmit"
+    >
       <p>{{ $t("register.suffix") }} {{form.suffix}}</p>
       <p>{{ $t("register.firstName") }} {{form.firstName}}</p>
       <p>{{ $t("register.middleName") }} {{form.middleName}}</p>
