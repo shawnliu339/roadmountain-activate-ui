@@ -322,7 +322,7 @@
           firstName: 'test',
           middleName: 'test',
           lastName: 'test',
-          simNo: '1',
+          simNo: '1234567890123',
           passportNo: 'test',
           passportExpiry: '2010-10-10',
           passportCountry: 'JP',
