@@ -9,6 +9,7 @@ const messages = {
     register: {
       title: "Register SIM Card",
       simCardInfo: "SIM Card Information",
+      pageInstruction: "According to Australian law, the traveller must offer name, passport number, address in Australia, etc to open SIM card. <br> The SIM card will be opened after 3 days of the registration date (excluding weekends and holidays in Australia).",
       brandAndPlan: "Brand and Plan",
       customerInfo: "Customer Information",
       contactInfo: "Contact Information",
@@ -64,10 +65,11 @@ const messages = {
   ja: {
     register: {
       title: "SIMカード開通専用ページ",
-      simCardInfo: "SIM Card Information",
-      brandAndPlan: "Bran and Plan",
-      customerInfo: "Customer Information",
-      contactInfo: "Contact Information",
+      simCardInfo: "SIMカード情報",
+      pageInstruction: "オーストラリア当局の法律に基づき、渡航者の氏名、パスポート番号、住所等を以下の欄にご記入下さい。<br>また、カードの開通日は、登録日の3日後となります。(オーストラリアの土日祝日を除く)",
+      brandAndPlan: "商品名と通信プラン",
+      customerInfo: "渡航者情報",
+      contactInfo: "連絡先",
       suffix: "敬称",
       suffixTooltip: "MR: 男性 <br> MRS: 既婚女性  <br> MISS: 未婚女性",
       firstName: "名前(名)",

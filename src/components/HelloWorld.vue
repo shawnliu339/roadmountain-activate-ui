@@ -30,7 +30,7 @@
     <div class="py-5 text-center">
       <img class="d-block mx-auto mb-4" src="/static/favicon.ico" alt="" width="72" height="72">
       <h3>{{ $t('register.title') }}</h3>
-      <p class="lead" style="font-size: 0.9rem">Below is an example form built entirely with Bootstrap’s form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>
+      <p class="lead" style="font-size: 0.9rem; text-align: left" v-html="$t('register.pageInstruction')"></p>
     </div>
     
 
@@ -40,7 +40,6 @@
         <div class="col-md-4 order-md-2 mb-4">
           <h4 class="d-flex justify-content-between align-items-center mb-3">
             <span class="text-muted">{{ $t("register.brandAndPlan") }}</span>
-            <span class="badge badge-secondary badge-pill">1</span>
           </h4>
           <ul class="list-group mb-3">
             <li class="list-group-item d-flex justify-content-between bg-light">
