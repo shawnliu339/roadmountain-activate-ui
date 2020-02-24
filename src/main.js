@@ -20,7 +20,7 @@ Vue.use(BootstrapVueIcons)
 
 // axios
 Vue.use(VueAxios, axios)
-Vue.axios.defaults.baseURL = `https://roadmountain-api.herokuapp.com`;
+// Vue.axios.defaults.baseURL = `https://localhost:8080`;
 
 // validation
 Vue.use(Vuelidate)

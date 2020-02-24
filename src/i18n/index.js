@@ -9,7 +9,7 @@ const messages = {
     register: {
       title: "Register SIM Card",
       simCardInfo: "SIM Card Information",
-      brandAndPlan: "Bran and Plan",
+      brandAndPlan: "Brand and Plan",
       customerInfo: "Customer Information",
       contactInfo: "Contact Information",
       suffix: "Suffix",
@@ -92,7 +92,7 @@ const messages = {
       passportCountry: "国籍",
       passportCountryInvalidFeedback: "国籍は必須項目です。",
       address: "オーストラリアの宿泊先",
-      addressPlaceHolder: "オーストラリアの宿泊先の記入は日本語、かな及び全角文字が禁止です。",
+      addressPlaceHolder: "オーストラリアの宿泊先は英語でご記入下さい。",
       addressInvalidFeedback: "オーストラリアの宿泊先は必須項目です。",
       birthday: "生年月日",
       birthdayInvalidFeedback: "生年月日は必須項目です。",

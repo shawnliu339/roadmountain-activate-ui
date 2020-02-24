@@ -29,8 +29,8 @@
 
     <div class="py-5 text-center">
       <img class="d-block mx-auto mb-4" src="/static/favicon.ico" alt="" width="72" height="72">
-      <h2>{{ $t('register.title') }}</h2>
-      <p class="lead">Below is an example form built entirely with Bootstrap’s form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>
+      <h3>{{ $t('register.title') }}</h3>
+      <p class="lead" style="font-size: 0.9rem">Below is an example form built entirely with Bootstrap’s form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>
     </div>
     
 
@@ -310,16 +310,16 @@
       return {
         form: {
           suffix: 'MR',
-          firstName: 'test',
-          middleName: 'test',
-          lastName: 'test',
-          simNo: '1234567890123',
-          passportNo: 'test',
-          passportExpiry: '2010-10-10',
+          firstName: '',
+          middleName: '',
+          lastName: '',
+          simNo: '',
+          passportNo: '',
+          passportExpiry: '',
           passportCountry: 'JP',
-          address: 'test',
-          dateOfBirth: '2010-10-10',
-          email: 'test@test.com',
+          address: '',
+          dateOfBirth: '',
+          email: '',
           brand: 'Optus',
           plan: '40'
         },
@@ -421,3 +421,9 @@
     }
   }
 </script>
+
+<style>
+input::placeholder {
+  font-size: small;
+}
+</style>
