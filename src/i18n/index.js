@@ -50,8 +50,11 @@ const messages = {
       privatePolicy: "Private Policy",
       submit: "Submit",
       reset: "Reset",
-      modalTitle: "Please check your information",
+      modalTitleUnsubmit: "Please confirm your information",
+      modalTitleSubmitting: "Registering",
+      modalTitleSubmitted: "Register Successfully",
       modalContent: "If all of the information is correct, please click ok to submit.",
+      modalSaving: "Saving...<br>Do not refresh the page.",
       successfulMessage: "Register successfully! We will send e-mail to you. If you don't receive the mail, please contact us.",
       errorMessage: "System error! Please contact us."
     },
@@ -107,9 +110,12 @@ const messages = {
       privatePolicy: "プライバシーポリシー",
       submit: "送信",
       reset: "リセット",
-      modalTitle: "入力内容をご確認下さい。",
+      modalTitleUnsubmit: "入力内容をご確認下さい",
+      modalTitleSubmitting: "登録中",
+      modalTitleSubmitted: "登録完了",
       modalContent: "入力内容をご確認の上、よろしければ「OK」ボタンを押してください。<br>入力をやり直す場合は、「Cancel」ボタンを押して入力画面に戻り、再度入力してください。",
-      successfulMessage: "登録が完了致しました。ご記入頂いたメールアドレス宛に、確認メールをお送りしておりますのでご確認下さい。なお、メールが届かない場合は、恐れ入りますが、購入サイト経由でご連絡頂きますようお願い申し上げます。",
+      modalSaving: "登録中・・・<br>このままお待ち下さい",
+      successfulMessage: "登録が完了致しました。ご記入頂いたメールアドレス宛に、確認メールをお送りしておりますのでご確認下さい。<br>なお、メールが届かない場合は、恐れ入りますが、購入サイト経由でご連絡頂きますようお願い申し上げます。",
       errorMessage: "登録エラーです。恐れ入りますが、購入サイト経由でご連絡頂きますようお願い申し上げます。"
     },
     nav: {

@@ -5,26 +5,65 @@
       size="sm"
       ref="modal-check" 
       :title="$t('register.modalTitle')" 
-      @ok="onSubmit"
+      :hide-header-close="true"
+      :no-close-on-backdrop="formStatus!='unsubmit'"
+      :no-close-on-esc="formStatus!='unsubmit'"
     >
-      <p>{{ $t("register.brand") }} : {{form.brand}}</p>
-      <p>{{ $t("register.plan") }} : {{form.plan}}</p>
-      <p>{{ $t("register.simNo") }} : {{form.simNo}}</p>
+      <template v-slot:modal-title>
+        <span v-if="formStatus=='unsubmit'">{{ $t('register.modalTitleUnsubmit') }}</span>
+        <span v-if="formStatus=='submitting'">{{ $t('register.modalTitleSubmitting') }}</span>
+        <span v-if="formStatus=='submitted'">{{ $t('register.modalTitleSubmitted') }}</span>
+      </template>
 
-      <p>{{ $t("register.suffix") }} : {{form.suffix}}</p>
-      <p>{{ $t("register.firstName") }} : {{form.firstName}}</p>
-      <p>{{ $t("register.middleName") }} : {{form.middleName}}</p>
-      <p>{{ $t("register.lastName") }} : {{form.lastName}}</p>
-      <p>{{ $t("register.birthday") }} : {{form.dateOfBirth}}</p>
+      <div v-if="formStatus == 'unsubmit'">
+        <p>{{ $t("register.brand") }} : {{form.brand}}</p>
+        <p>{{ $t("register.plan") }} : {{form.plan}}</p>
+        <p>{{ $t("register.simNo") }} : {{form.simNo}}</p>
 
-      <p>{{ $t("register.passportNo") }} : {{form.passportNo}}</p>
-      <p>{{ $t("register.passportExpiry") }} : {{form.passportExpiry}}</p>
-      <p>{{ $t("register.passportCountry") }} : {{countries[form.passportCountry]}}</p>
+        <p>{{ $t("register.suffix") }} : {{form.suffix}}</p>
+        <p>{{ $t("register.firstName") }} : {{form.firstName}}</p>
+        <p>{{ $t("register.middleName") }} : {{form.middleName}}</p>
+        <p>{{ $t("register.lastName") }} : {{form.lastName}}</p>
+        <p>{{ $t("register.birthday") }} : {{form.dateOfBirth}}</p>
 
-      <p>{{ $t("register.address") }} : {{form.address}}</p>
-      <p>{{ $t("register.email") }} : {{form.email}}</p>
-      
-      <p v-html="$t('register.modalContent')"></p>
+        <p>{{ $t("register.passportNo") }} : {{form.passportNo}}</p>
+        <p>{{ $t("register.passportExpiry") }} : {{form.passportExpiry}}</p>
+        <p>{{ $t("register.passportCountry") }} : {{countries[form.passportCountry]}}</p>
+
+        <p>{{ $t("register.address") }} : {{form.address}}</p>
+        <p>{{ $t("register.email") }} : {{form.email}}</p>
+        
+        <p v-html="$t('register.modalContent')"></p>
+      </div>
+      <div v-if="formStatus == 'submitting'">
+        <p class="text-center"><b-spinner></b-spinner></p>
+        <p class="text-center" v-html="$t('register.modalSaving')"></p>
+      </div>
+      <p v-if="formStatus == 'submitted'" v-html="$t('register.successfulMessage')"></p>
+
+      <template v-slot:modal-footer="{ ok, cancel, hide }">
+        <b-button
+          size="sm" 
+          variant="secondary" 
+          @click="cancel()" 
+          v-if="formStatus=='unsubmit' || formStatus=='submitting'"
+          :disabled="formStatus=='submitting'"
+        >
+          Cancel
+        </b-button>
+        <b-button
+          size="sm"
+          variant="success"
+          @click="onSubmit"
+          v-if="formStatus=='unsubmit' || formStatus=='submitting'"
+          :disabled="formStatus=='submitting'"
+        >
+          OK
+        </b-button>
+        <b-button size="sm" variant="primary" @click="resetForm()" v-if="formStatus=='submitted'">
+          Close
+        </b-button>
+      </template>
     </b-modal>
 
     <div class="py-5 text-center">
@@ -326,7 +365,8 @@
         countries: { 'JP': 'Japan' },
         show: true,
         read: true,
-        accepted: false
+        accepted: false,
+        formStatus: "unsubmit"
       }
     },
     created() {
@@ -373,15 +413,16 @@
       },
       onSubmit(evt) {
         evt.preventDefault()
-        this.axios.post("/registers", this.form)
-        .then(res => {
-          this.resetForm()
-          this.$refs['modal-check'].hide()
-          this.makeToast('success', this.$t('register.successfulMessage'))
-        })
-        .catch(error => {
-          this.makeToast('danger', this.$t('register.errorMessage'))
-        })
+        this.formStatus = "submitting"
+        this.axios
+          .post("/registers", this.form)
+          .then(res => {
+            this.formStatus = "submitted"
+          })
+          .catch(error => {
+            this.makeToast('danger', this.$t('register.errorMessage'))
+            this.formStatus = "unsubmit"
+          })
       },
       makeToast(variant, message) {
         this.$bvToast.toast(message, {
@@ -390,6 +431,8 @@
         })
       },
       resetForm() {
+        // Close form modal
+        this.$refs['modal-check'].hide()
         // Rest validation
         this.$v.form.$reset()
         // Reset our form values
@@ -407,6 +450,7 @@
         this.form.brand = 'Optus'
         this.form.plan = '40'
         this.accepted = false
+        this.formStatus = "unsubmit"
         // Trick to reset/clear native browser form validation state
         this.show = false
         this.$nextTick(() => {
