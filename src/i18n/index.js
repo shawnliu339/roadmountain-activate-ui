@@ -72,7 +72,7 @@ const messages = {
     register: {
       title: "SIMカード開通専用ページ",
       simCardInfo: "SIMカード情報",
-      pageInstruction: "オーストラリア当局の法律に基づき、渡航者の氏名、パスポート番号、住所等を以下の欄にご記入下さい。<br>また、カードの開通日は、登録日の3日後となります。(オーストラリアの土日祝日を除く)",
+      pageInstruction: "オーストラリア当局の法律に基づき、SIMカード開通は渡航者の氏名、パスポート番号、住所等の情報が必要です。<b style='font-weight: 600'>以下の欄に半角の英数字と記号のみでご記入下さい。</b><br>また、カードの開通日は、登録日の3日後となります。(オーストラリアの土日祝日を除く)",
       brandAndPlan: "商品名と通信プラン",
       customerInfo: "渡航者情報",
       contactInfo: "連絡先",
