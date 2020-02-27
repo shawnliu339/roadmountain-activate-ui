@@ -4,7 +4,6 @@
       scrollable
       size="sm"
       ref="modal-check" 
-      :title="$t('register.modalTitle')" 
       :hide-header-close="true"
       :no-close-on-backdrop="formStatus!='unsubmit'"
       :no-close-on-esc="formStatus!='unsubmit'"
@@ -105,8 +104,17 @@
               :state="validateState('simNo')"
               aria-describedby="input-sim-num-feedback"
             ></b-form-input>
-            <b-form-invalid-feedback　id="input-sim-num-feedback">
-              {{ $t("register.simNoInvalidFeedback") }}
+            <b-form-invalid-feedback　id="input-sim-num-feedback" v-if="!$v.form.simNo.required">
+              {{ $t("register.simNoRequiredInvalidFeedback") }}
+            </b-form-invalid-feedback>
+            <b-form-invalid-feedback　id="input-sim-num-feedback" v-if="!$v.form.simNo.numeric">
+              {{ $t("register.simNoNumericInvalidFeedback") }}
+            </b-form-invalid-feedback>
+            <b-form-invalid-feedback　id="input-sim-num-feedback" v-if="!$v.form.simNo.minLength || !$v.form.simNo.maxLength">
+              {{ $t("register.simNoLengthInvalidFeedback") }}
+            </b-form-invalid-feedback>
+            <b-form-invalid-feedback　id="input-sim-num-feedback" v-if="!$v.form.simNo.unique">
+              {{ $t("register.simNoUniqueInvalidFeedback") }}
             </b-form-invalid-feedback>
           </div>
           <hr class="mb-4">
@@ -382,7 +390,14 @@
           required,
           numeric,
           minLength: minLength(13),
-          maxLength: maxLength(13)
+          maxLength: maxLength(13),
+          unique(simNo) {
+            if (simNo.length !== 13) return true
+            return this.axios.get('/validators/sims/' + simNo + '/unique')
+                      .then(res => {
+                        return res.data
+                      })
+          }
         },
         passportNo: { required, alphaNum },
         passportExpiry: { required },
