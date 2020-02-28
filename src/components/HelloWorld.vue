@@ -77,7 +77,7 @@
       <div class="row">
         <div class="col-md-4 order-md-2 mb-4">
           <h4 class="d-flex justify-content-between align-items-center mb-3">
-            <span class="text-muted">{{ $t("register.brandAndPlan") }}</span>
+            <span class="text-muted" style="font-size: 1.4rem">{{ $t("register.brandAndPlan") }}</span>
           </h4>
           <ul class="list-group mb-3">
             <li class="list-group-item d-flex justify-content-between bg-light">
@@ -139,7 +139,9 @@
 
           <div class="row">
             <div class="col-md-4 mb-3">
-              <label for="input-firstname">{{ $t("register.firstName") }}</label>
+              <label for="input-firstname" style="font-size: 0.9rem">
+                {{ $t("register.firstName") }}
+              </label>
               <b-form-input
                 id="input-firstname"
                 v-model="$v.form.firstName.$model"
@@ -153,7 +155,7 @@
             </div>
 
             <div class="col-md-4 mb-3">
-              <label for="input-middlename" style="font-size: 0.9rem">
+              <label for="input-middlename" style="font-size: 0.87rem">
                 {{ $t("register.middleName") }}
                 <small class="text-muted" style="font-size: 0.5rem">
                   ({{ $t("register.optional") }})
@@ -172,7 +174,9 @@
             </div>
 
             <div class="col-md-4 mb-3">
-              <label for="input-lastname">{{ $t("register.lastName") }}</label>
+              <label for="input-lastname" style="font-size: 0.9rem">
+                {{ $t("register.lastName") }}
+              </label>
               <b-form-input
                 id="input-lastname"
                 v-model="$v.form.lastName.$model"
@@ -192,6 +196,7 @@
               id="input-birthday"
               v-model="$v.form.dateOfBirth.$model"
               type="date"
+              :placeholder="$t('register.birthdayPlaceHolder')"
               :state="validateState('dateOfBirth')"
               aria-describedby="input-birthday-feedback"
             ></b-form-input>
@@ -220,6 +225,7 @@
               id="input-expiry"
               v-model="$v.form.passportExpiry.$model"
               type="date"
+              :placeholder="$t('register.passportExpiryPlaceHolder')"
               :state="validateState('passportExpiry')"
               aria-describedby="input-expiry-feedback"
             ></b-form-input>
