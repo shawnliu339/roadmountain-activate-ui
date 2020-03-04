@@ -139,18 +139,18 @@
 
           <div class="row">
             <div class="col-md-4 mb-3">
-              <label for="input-firstname" style="font-size: 0.9rem">
-                {{ $t("register.firstName") }}
+              <label for="input-lastname" style="font-size: 0.9rem">
+                {{ $t("register.lastName") }}
               </label>
               <b-form-input
-                id="input-firstname"
-                v-model="$v.form.firstName.$model"
-                :placeholder="$t('register.firstNamePlaceHolder')"
-                :state="validateState('firstName')"
-                aria-describedby="input-firstname-feedback"
+                id="input-lastname"
+                v-model="$v.form.lastName.$model"
+                :placeholder="$t('register.lastNamePlaceHolder')"
+                :state="validateState('lastName')"
+                aria-describedby="input-lastname-feedback"
               ></b-form-input>
-              <b-form-invalid-feedback　id="input-firstname-feedback">
-                {{ $t("register.firstNameInvalidFeedback") }}
+              <b-form-invalid-feedback　id="input-lastname-feedback">
+                {{ $t("register.lastNameInvalidFeedback") }}
               </b-form-invalid-feedback>
             </div>
 
@@ -174,18 +174,18 @@
             </div>
 
             <div class="col-md-4 mb-3">
-              <label for="input-lastname" style="font-size: 0.9rem">
-                {{ $t("register.lastName") }}
+              <label for="input-firstname" style="font-size: 0.9rem">
+                {{ $t("register.firstName") }}
               </label>
               <b-form-input
-                id="input-lastname"
-                v-model="$v.form.lastName.$model"
-                :placeholder="$t('register.lastNamePlaceHolder')"
-                :state="validateState('lastName')"
-                aria-describedby="input-lastname-feedback"
+                id="input-firstname"
+                v-model="$v.form.firstName.$model"
+                :placeholder="$t('register.firstNamePlaceHolder')"
+                :state="validateState('firstName')"
+                aria-describedby="input-firstname-feedback"
               ></b-form-input>
-              <b-form-invalid-feedback　id="input-lastname-feedback">
-                {{ $t("register.lastNameInvalidFeedback") }}
+              <b-form-invalid-feedback　id="input-firstname-feedback">
+                {{ $t("register.firstNameInvalidFeedback") }}
               </b-form-invalid-feedback>
             </div>
           </div>
