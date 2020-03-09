@@ -89,7 +89,32 @@
           </ul>
         </div>
         <div class="col-md-8 order-md-1">
-          <h4 class="mb-3">{{ $t("register.simCardInfo") }}</h4>
+
+          <div class="mb-3">
+            <label for="input-order-id">{{ $t('register.orderId') }}</label>
+            <b-form-input
+              id="input-order-id"
+              v-model="$v.form.orderId.$model"
+              :placeholder="$t('register.orderIdPlaceHolder')"
+              :state="validateState('orderId')"
+              aria-describedby="input-order-id-feedback"
+            ></b-form-input>
+            <b-form-invalid-feedback　id="input-order-id-feedback" v-if="!$v.form.orderId.required">
+              {{ $t("register.orderIdRequiredInvalidFeedback") }}
+            </b-form-invalid-feedback>
+            <b-form-invalid-feedback　id="input-order-id-feedback" v-if="!$v.form.orderId.numeric">
+              {{ $t("register.orderIdNumericInvalidFeedback") }}
+            </b-form-invalid-feedback>
+            <b-form-invalid-feedback　id="input-order-id-feedback" v-if="!$v.form.orderId.minLength || !$v.form.orderId.maxLength">
+              {{ $t("register.orderIdLengthInvalidFeedback") }}
+            </b-form-invalid-feedback>
+            <b-form-invalid-feedback　id="input-order-id-feedback" v-if="!$v.form.orderId.existing">
+              {{ $t("register.orderIdExistingInvalidFeedback") }}
+            </b-form-invalid-feedback>
+            <b-form-invalid-feedback　id="input-order-id-feedback" v-if="!$v.form.orderId.unique">
+              {{ $t("register.orderIdUniqueInvalidFeedback") }}
+            </b-form-invalid-feedback>
+          </div>
 
           <div class="mb-3">
             <b-button id="tooltip-sim" pill variant="success"
@@ -365,6 +390,7 @@
           firstName: '',
           middleName: '',
           lastName: '',
+          orderId: '',
           simNo: '',
           passportNo: '',
           passportExpiry: '',
@@ -392,6 +418,27 @@
         firstName: { required, alpha },
         middleName: { alpha },
         lastName: { required, alpha },
+        orderId: {
+          required,
+          numeric,
+          minLength: minLength(7),
+          maxLength: maxLength(7),
+          unique(orderId) {
+            if (orderId.length !== 7) return true
+            return this.axios.get('/validators/orderids/' + orderId + '/unique')
+                      .then(res => {
+                        return res.data
+                      })
+          },
+          existing(orderId) {
+            if (orderId.length !== 7) return true
+            return this.axios.get('/validators/orderids/' + orderId + '/exist')
+                      .then(res => {
+                        return res.data
+                      })
+          }
+
+        },
         simNo: {
           required,
           numeric,
@@ -461,6 +508,7 @@
         this.form.firstName = ''
         this.form.middleName = ''
         this.form.lastName = ''
+        this.form.orderId = ''
         this.form.simNo = ''
         this.form.passportNo = ''
         this.form.passportExpiry = ''

@@ -21,7 +21,7 @@ Vue.use(BootstrapVueIcons)
 // axios
 Vue.use(VueAxios, axios)
 Vue.axios.defaults.baseURL = `/api`;
- // Vue.axios.defaults.baseURL = `http://localhost:8080/api`;
+// Vue.axios.defaults.baseURL = `http://localhost:8080/api`;
 
 // validation
 Vue.use(Vuelidate)
